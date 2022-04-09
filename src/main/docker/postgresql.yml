@@ -1,15 +1,24 @@
-# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
 version: '3.8'
+
 services:
+
   tab-postgresql:
+
     image: postgres:14.2
-    # volumes:
-    #   - ~/volumes/jhipster/TAB/postgresql/:/var/lib/postgresql/data/
+
+    container_name: tab-database
+
     environment:
+      - POSTGRES_DB=TAB_db
       - POSTGRES_USER=TAB
-      - POSTGRES_PASSWORD=
+      - POSTGRES_PASSWORD=tab
       - POSTGRES_HOST_AUTH_METHOD=trust
-    # If you want to expose these ports outside your dev PC,
-    # remove the "127.0.0.1:" prefix
+      - PGDATA=/var/lib/postgresql/data/db-files
+
+    volumes:
+      - type: bind
+        target: /var/lib/postgresql/data
+        source: '$PWD/database'
+
     ports:
-      - 127.0.0.1:5432:5432
+      - 5432:5432
