@@ -1,0 +1,38 @@
+entity Image{
+    name String required
+    image ImageBlob required
+    description String maxlength(150)
+    imageSize String required
+    format String required
+    dateOfCreate LocalDate required
+}
+
+entity Folder{
+    name String required
+    description String maxlength(150)
+}
+
+entity Category{
+    name String required
+    description String maxlength(150)
+}
+
+relationship ManyToOne{
+    Folder to Folder{parentFolder}
+}
+
+relationship ManyToMany{
+    Folder{image(imageId)} to Image{folder},
+    Category{image(imageId)} to Image{category}
+}
+
+relationship ManyToOne{
+    Folder{user} to User,
+    Image{user} to User
+}
+
+paginate Folder, Image with pagination
+
+filter Category
+
+service all with serviceImpl

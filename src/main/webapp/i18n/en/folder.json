@@ -1,0 +1,29 @@
+{
+  "tabApp": {
+    "folder": {
+      "home": {
+        "title": "Folders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Folder",
+        "createOrEditLabel": "Create or edit a Folder",
+        "notFound": "No Folders found"
+      },
+      "created": "A new Folder is created with identifier {{ param }}",
+      "updated": "A Folder is updated with identifier {{ param }}",
+      "deleted": "A Folder is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Folder {{ id }}?"
+      },
+      "detail": {
+        "title": "Folder"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "folder": "Folder",
+      "user": "User",
+      "image": "Image",
+      "parentFolder": "Parent Folder"
+    }
+  }
+}
