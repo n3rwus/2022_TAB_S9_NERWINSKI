@@ -48,6 +48,14 @@ public class CacheConfiguration {
             createCache(cm, pl.polsl.tab.domain.User.class.getName());
             createCache(cm, pl.polsl.tab.domain.Authority.class.getName());
             createCache(cm, pl.polsl.tab.domain.User.class.getName() + ".authorities");
+            createCache(cm, pl.polsl.tab.domain.Image.class.getName());
+            createCache(cm, pl.polsl.tab.domain.Image.class.getName() + ".folders");
+            createCache(cm, pl.polsl.tab.domain.Image.class.getName() + ".categories");
+            createCache(cm, pl.polsl.tab.domain.Folder.class.getName());
+            createCache(cm, pl.polsl.tab.domain.Folder.class.getName() + ".images");
+            createCache(cm, pl.polsl.tab.domain.Folder.class.getName() + ".parentFolders");
+            createCache(cm, pl.polsl.tab.domain.Category.class.getName());
+            createCache(cm, pl.polsl.tab.domain.Category.class.getName() + ".images");
             // jhipster-needle-ehcache-add-entry
         };
     }

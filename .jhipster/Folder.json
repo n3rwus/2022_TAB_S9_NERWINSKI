@@ -1,0 +1,54 @@
+{
+  "applications": "*",
+  "changelogDate": "20220419205633",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "folder",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Folder",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "folder",
+      "otherEntityRelationshipName": "parentFolder",
+      "relationshipName": "folder",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "folder",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "imageId",
+      "otherEntityName": "image",
+      "otherEntityRelationshipName": "folder",
+      "ownerSide": true,
+      "relationshipName": "image",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "folder",
+      "otherEntityRelationshipName": "folder",
+      "relationshipName": "parentFolder",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}
