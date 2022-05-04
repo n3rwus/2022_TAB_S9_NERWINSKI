@@ -56,7 +56,7 @@ export const FolderDetail = (props: RouteComponentProps<{ id: string }>) => {
             {folderEntity.images
               ? folderEntity.images.map((val, i) => (
                   <span key={val.id}>
-                    <a>{val.imageId}</a>
+                    <a>{val.id}</a>
                     {folderEntity.images && i === folderEntity.images.length - 1 ? '' : ', '}
                   </span>
                 ))

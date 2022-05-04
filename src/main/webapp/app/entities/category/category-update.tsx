@@ -121,7 +121,7 @@ export const CategoryUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 {images
                   ? images.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.imageId}
+                        {otherEntity.id}
                       </option>
                     ))
                   : null}

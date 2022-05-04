@@ -48,7 +48,7 @@ export const CategoryDetail = (props: RouteComponentProps<{ id: string }>) => {
             {categoryEntity.images
               ? categoryEntity.images.map((val, i) => (
                   <span key={val.id}>
-                    <a>{val.imageId}</a>
+                    <a>{val.id}</a>
                     {categoryEntity.images && i === categoryEntity.images.length - 1 ? '' : ', '}
                   </span>
                 ))

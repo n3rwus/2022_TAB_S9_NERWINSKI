@@ -75,7 +75,7 @@ export const Category = (props: RouteComponentProps<{ url: string }>) => {
                     {category.images
                       ? category.images.map((val, j) => (
                           <span key={j}>
-                            <Link to={`image/${val.id}`}>{val.imageId}</Link>
+                            <Link to={`image/${val.id}`}>{val.id}</Link>
                             {j === category.images.length - 1 ? '' : ', '}
                           </span>
                         ))
