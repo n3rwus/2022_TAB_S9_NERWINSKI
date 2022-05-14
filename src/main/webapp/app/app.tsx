@@ -4,7 +4,7 @@ import 'app/config/dayjs.ts';
 
 import React, { useEffect } from 'react';
 import { Card } from 'reactstrap';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -17,7 +17,11 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
+import MenuAppBar from './our_frontend/components/Navbar';
+import MainPage from './our_frontend/pages/MainPage';
+import AddImage from './our_frontend/pages/AddImage';
 
+const wantOurFrontend = true;
 const baseHref = document.querySelector('base').getAttribute('href').replace(/\/$/, '');
 
 export const App = () => {
@@ -37,29 +41,48 @@ export const App = () => {
 
   const paddingTop = '60px';
   return (
-    <Router basename={baseHref}>
-      <div className="app-container" style={{ paddingTop }}>
-        <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
-        <ErrorBoundary>
-          <Header
-            isAuthenticated={isAuthenticated}
-            isAdmin={isAdmin}
-            currentLocale={currentLocale}
-            ribbonEnv={ribbonEnv}
-            isInProduction={isInProduction}
-            isOpenAPIEnabled={isOpenAPIEnabled}
-          />
-        </ErrorBoundary>
-        <div className="container-fluid view-container" id="app-view-container">
-          <Card className="jh-card">
+    <React.Fragment>
+      {!wantOurFrontend && (
+        <Router basename={baseHref}>
+          <div className="app-container" style={{ paddingTop }}>
+            <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
             <ErrorBoundary>
-              <AppRoutes />
+              <Header
+                isAuthenticated={isAuthenticated}
+                isAdmin={isAdmin}
+                currentLocale={currentLocale}
+                ribbonEnv={ribbonEnv}
+                isInProduction={isInProduction}
+                isOpenAPIEnabled={isOpenAPIEnabled}
+              />
             </ErrorBoundary>
-          </Card>
-          <Footer />
-        </div>
-      </div>
-    </Router>
+            <div className="container-fluid view-container" id="app-view-container">
+              <Card className="jh-card">
+                <ErrorBoundary>
+                  <AppRoutes />
+                </ErrorBoundary>
+              </Card>
+              <Footer />
+            </div>
+          </div>
+        </Router>
+      )}
+      {wantOurFrontend && (
+        <Router>
+          <Switch>
+            <Route exact path={'/'}>
+              <Redirect to="/mainPage" />
+            </Route>
+            <Route exact path={'/mainPage'}>
+              <MainPage />
+            </Route>
+            <Route exact path={'/addPicture'}>
+              <AddImage />
+            </Route>
+          </Switch>
+        </Router>
+      )}
+    </React.Fragment>
   );
 };
 
