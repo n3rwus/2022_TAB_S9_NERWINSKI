@@ -1,9 +1,10 @@
 import { Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { styled } from '@mui/material/styles';
 
 interface iUploadImageButton {
   multiple: boolean;
+  handleImages: Dispatch<SetStateAction<FileList>>;
 }
 
 const Input = styled('input')({
@@ -11,9 +12,7 @@ const Input = styled('input')({
 });
 
 const UploadImageButton = (props: iUploadImageButton) => {
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const { multiple } = props;
+  const { multiple, handleImages } = props;
 
   return (
     <React.Fragment>
@@ -24,14 +23,16 @@ const UploadImageButton = (props: iUploadImageButton) => {
           multiple={multiple}
           type="file"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setSelectedImage(event.target.files[0]);
+            handleImages(event.target.files);
+          }}
+          onClick={event => {
+            handleImages(undefined);
           }}
         />
         <Button variant="contained" component="span" fullWidth sx={{ height: '56px' }}>
           {'Upload'}
         </Button>
       </label>
-      {selectedImage && <img src={URL.createObjectURL(selectedImage)} alt={'Dupa'} loading="lazy" />}
     </React.Fragment>
   );
 };

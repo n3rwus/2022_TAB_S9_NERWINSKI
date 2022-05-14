@@ -7,8 +7,11 @@ import SelectBasic from '../components/SelectBasic';
 import SelectTags from '../components/SelectTags';
 import MyTextField from '../components/TextField';
 import UploadImageButton from '../components/UploadImageButton';
+import UploadImageCard from '../components/UploadImageCard';
 
 const AddImage = () => {
+  const [images, setImages] = React.useState<FileList>();
+
   return (
     <React.Fragment>
       <Navbar centerText={'Upload images'} />
@@ -30,14 +33,19 @@ const AddImage = () => {
             <BasicDatePicker />
           </Grid>
           <Grid item xs={12} sm={12} md={4} textAlign="center">
-            <UploadImageButton multiple={true} />
+            <UploadImageButton multiple={true} handleImages={setImages} />
           </Grid>
           <Grid item xs={12} sm={12} md={4} textAlign="center">
-            <SaveButton disabled={true} />
+            <SaveButton disabled={images === undefined} />
           </Grid>
         </Grid>
       </Box>
       <hr style={{ margin: '30px' }} />
+      <Box sx={{ flexGrow: 1, width: '90%', mx: 'auto', mt: '100px' }}>
+        <Grid container spacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          {images && Array.from(images).map((image, index) => <UploadImageCard key={index} image={image} index={index} />)}
+        </Grid>
+      </Box>
     </React.Fragment>
   );
 };
